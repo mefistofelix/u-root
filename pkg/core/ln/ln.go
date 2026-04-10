@@ -14,7 +14,9 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
+	"syscall"
 
 	"github.com/u-root/u-root/pkg/core"
 	"github.com/u-root/u-root/pkg/uroot/unixflag"
@@ -112,6 +114,9 @@ func (f flags) run(c *command, args []string) error {
 			resolvedTarget = relTarget
 		}
 		if err := resolvedLinkFunc(resolvedTarget, resolvedLinkName); err != nil {
+			if f.symlink && is_windows_symlink_privilege_error(err) {
+				return fmt.Errorf("%w; enable Windows Developer Mode or run elevated to create symbolic links", err)
+			}
 			return err
 		}
 		if f.verbose {
@@ -119,6 +124,18 @@ func (f flags) run(c *command, args []string) error {
 		}
 	}
 	return nil
+}
+
+func is_windows_symlink_privilege_error(err error) bool {
+	if runtime.GOOS != "windows" {
+		return false
+	}
+	var linkErr *os.LinkError
+	if !errors.As(err, &linkErr) {
+		return false
+	}
+	var errno syscall.Errno
+	return errors.As(linkErr.Err, &errno) && errno == 1314
 }
 
 func (f *flags) eval_args(c *command, args []string) ([]string, string, error) {
