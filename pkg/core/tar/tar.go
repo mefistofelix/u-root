@@ -112,7 +112,8 @@ func (t *Tar) validate(args []string) error {
 
 func (t *Tar) execute(args []string) error {
 	opts := &tarutil.Opts{
-		NoRecursion: t.noRecursion,
+		NoRecursion:     t.noRecursion,
+		ChangeDirectory: t.WorkingDir,
 	}
 	if t.verbose {
 		opts.Filters = []tarutil.Filter{tarutil.VerboseFilter}
