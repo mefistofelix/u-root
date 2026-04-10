@@ -129,13 +129,7 @@ func (t *Tar) execute(args []string) error {
 			return err
 		}
 
-		// Resolve all input paths relative to working directory
-		resolvedArgs := make([]string, len(args))
-		for i, arg := range args {
-			resolvedArgs[i] = t.ResolvePath(arg)
-		}
-
-		if err := tarutil.CreateTar(f, resolvedArgs, opts); err != nil {
+		if err := tarutil.CreateTar(f, args, opts); err != nil {
 			f.Close()
 			return err
 		}
