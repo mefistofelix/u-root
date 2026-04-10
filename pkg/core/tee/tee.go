@@ -36,7 +36,7 @@ func (c *command) RunContext(_ context.Context, args ...string) error {
 	fs.SetOutput(c.Stderr)
 	var appendMode bool
 	fs.BoolVar(&appendMode, "a", false, "append")
-	if err := fs.Parse(args[1:]); err != nil {
+	if err := fs.Parse(args); err != nil {
 		return err
 	}
 

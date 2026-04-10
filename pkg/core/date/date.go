@@ -57,8 +57,8 @@ var strftimeReplacer = strings.NewReplacer(
 func (c *command) RunContext(_ context.Context, args ...string) error {
 	now := time.Now()
 	layout := "Mon Jan  2 15:04:05 MST 2006"
-	if len(args) >= 2 && strings.HasPrefix(args[1], "+") {
-		layout = strftimeReplacer.Replace(args[1][1:])
+	if len(args) >= 1 && strings.HasPrefix(args[0], "+") {
+		layout = strftimeReplacer.Replace(args[0][1:])
 	}
 	fmt.Fprintln(c.Stdout, now.Format(layout))
 	return nil

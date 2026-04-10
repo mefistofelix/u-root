@@ -42,7 +42,7 @@ func (c *command) RunContext(ctx context.Context, args ...string) error {
 	fs.BoolVar(&dupOnly, "d", false, "only duplicated lines")
 	fs.BoolVar(&uniqueOnly, "u", false, "only unique lines")
 	fs.BoolVar(&ignoreCase, "i", false, "case-insensitive")
-	if err := fs.Parse(args[1:]); err != nil {
+	if err := fs.Parse(args); err != nil {
 		return err
 	}
 

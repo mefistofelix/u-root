@@ -57,7 +57,7 @@ func (c *command) RunContext(ctx context.Context, args ...string) error {
 	fs_set.BoolVar(&quiet, "q", false, "quiet")
 	fs_set.BoolVar(&recursive, "r", false, "recursive")
 	fs_set.StringVar(&expr, "e", "", "pattern")
-	if err := fs_set.Parse(args[1:]); err != nil {
+	if err := fs_set.Parse(args); err != nil {
 		return err
 	}
 	positional := fs_set.Args()

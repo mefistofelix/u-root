@@ -74,7 +74,7 @@ func (c *command) RunContext(ctx context.Context, args ...string) error {
 	fs.StringVar(&fieldsSpec, "f", "", "fields")
 	fs.StringVar(&charsSpec, "c", "", "characters")
 	fs.StringVar(&delim, "d", "\t", "delimiter")
-	if err := fs.Parse(args[1:]); err != nil {
+	if err := fs.Parse(args); err != nil {
 		return err
 	}
 

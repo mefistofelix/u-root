@@ -55,7 +55,7 @@ func (c *command) RunContext(_ context.Context, args ...string) error {
 	var deleteMode, squeeze bool
 	fs.BoolVar(&deleteMode, "d", false, "delete characters in set1")
 	fs.BoolVar(&squeeze, "s", false, "squeeze repeated characters")
-	if err := fs.Parse(args[1:]); err != nil {
+	if err := fs.Parse(args); err != nil {
 		return err
 	}
 

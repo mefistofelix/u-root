@@ -47,7 +47,7 @@ func (c *command) RunContext(ctx context.Context, args ...string) error {
 	fs.BoolVar(&fold, "f", false, "fold case")
 	fs.BoolVar(&ignoreBlanks, "b", false, "ignore leading blanks")
 	fs.StringVar(&outputFile, "o", "", "output file")
-	if err := fs.Parse(args[1:]); err != nil {
+	if err := fs.Parse(args); err != nil {
 		return err
 	}
 

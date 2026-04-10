@@ -32,10 +32,10 @@ func (c *command) Run(args ...string) error {
 
 // RunContext executes the command.
 func (c *command) RunContext(ctx context.Context, args ...string) error {
-	if len(args) < 2 {
+	if len(args) < 1 {
 		return fmt.Errorf("missing operand")
 	}
-	s := args[1]
+	s := args[0]
 	d, err := time.ParseDuration(s)
 	if err != nil {
 		secs, nerr := strconv.ParseFloat(s, 64)
